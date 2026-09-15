@@ -1,7 +1,6 @@
 Introduction
 ============
 
-.. currentmodule:: fun
 
 **Lua Fun** is a high-performance functional programming library
 designed for `LuaJIT tracing just-in-time compiler
@@ -9,14 +8,15 @@ designed for `LuaJIT tracing just-in-time compiler
 
 The library provides a set of more than 50 programming primitives typically
 found in languages like Standard ML, Haskell, Erlang, JavaScript, Python and
-even Lisp. High-order functions such as :func:`map`, :func:`filter`,
-:func:`reduce`, :func:`zip` will help you to **write simple and efficient
-functional code**.
+even Lisp. High-order functions such as `map <api/module/fun.html#fun.map>`_,
+`filter <api/module/fun.html#fun.filter>`_,
+`reduce <api/module/fun.html#fun.reduce>`_ and
+`zip <api/module/fun.html#fun.zip>`_ will help you to **write simple and
+efficient functional code**.
 
 Let's see an example:
 
-.. code-block:: lua
-   :emphasize-lines: 2, 4
+.. code:: lua
 
     -- Functional style
     require "fun" ()
@@ -26,8 +26,7 @@ Let's see an example:
     print(x)
     50.011981355266
 
-.. code-block:: lua
-   :emphasize-lines: 2, 4
+.. code:: lua
 
     -- Object-oriented style
     local fun = require "fun"
@@ -43,8 +42,7 @@ Functional compositions and high-order functions can be translated into
 **efficient machine code**. Can you believe it? Just try to run the example above
 with ``luajit -jdump`` and see what happens:
 
-.. code-block:: none
-   :emphasize-lines: 2,14
+.. code:: text
 
     -- skip some initialization code --
     ->LOOP:

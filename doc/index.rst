@@ -1,29 +1,24 @@
-.. _library-index:
+Lua Functional Library
+======================
 
-###############################
-  Lua Functional Library
-###############################
+:Release: 0.1
+:Updated: Aug 10, 2024
 
-:Release: |version|
-:Date: |today|
-
-.. highlight:: lua
+**Lua Fun** is a high-performance functional programming library designed for
+`LuaJIT <http://luajit.org/luajit.html>`_ and built around the tracing
+just-in-time compiler.
 
 Contents
-========
+--------
 
-.. toctree::
-   :maxdepth: 2
+* `Introduction <intro.html>`_
+* `Getting Started <getting_started.html>`_
+* `Under the Hood <under_the_hood.html>`_
+* `About <about.html>`_
 
-   intro.rst
-   getting_started.rst
-   reference.rst
-   under_the_hood.rst
-   about.rst
+API Reference
+-------------
 
-Indices and tables
-==================
+The API reference is generated from the EmmyLua annotations in ``fun.lua``:
 
-* :ref:`genindex`
-* :ref:`search`
-
+* `API Reference <api/module/fun.html>`_

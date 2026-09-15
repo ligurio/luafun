@@ -1,4 +1,9 @@
-name: Setup emmylua_check on Linux
+name: Setup EmmyLua tools on Linux
+inputs:
+  packages:
+    description: Space-separated cargo packages to install
+    required: false
+    default: emmylua_check
 runs:
   using: composite
   steps:
@@ -18,6 +23,10 @@ runs:
         restore-keys: |
           ${{ runner.os }}-cargo-
 
-    - name: Setup emmylua_check
-      run: cargo install emmylua_check --version 0.25.1
+    - name: Setup EmmyLua tools
+      run: >
+        cargo install --locked
+        --git https://github.com/EmmyLuaLs/emmylua-analyzer-rust
+        --rev 9ab790824ca8bd15c9f612016dee3de42f83b896
+        ${{ inputs.packages }}
       shell: bash

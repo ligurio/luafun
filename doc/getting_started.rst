@@ -16,14 +16,14 @@ The library is platform-independent and expected to work on all platforms that
 supported by Lua(JIT). It can be also used in any Lua(JIT) based applications,
 e.g. Tarantool_ or OpenResty_.
 
-You might need diff_ tool to run test system and sphinx_ to regenerate the
-documentation from source files.
+You might need the diff_ tool to run the test system and docutils_ to
+regenerate the documentation from source files.
 
 .. _LuaJIT: http://luajit.org/
 .. _Tarantool: http://tarantool.org/
 .. _OpenResty: http://openresty.org/
 .. _diff: http://en.wikipedia.org/wiki/Diff
-.. _sphinx: http://sphinx-doc.org/
+.. _docutils: https://docutils.sourceforge.io/
 
 Installing LuaJIT
 -----------------
@@ -36,21 +36,21 @@ From Sources
 1. Clone LuaJIT git repository. Please note that **v2.1** branch is needed.
 You can always select this branch using ``git checkout v2.1``.
 
-.. code-block:: bash
+.. code:: bash
 
     $ git clone http://luajit.org/git/luajit-2.0.git -b v2.1 luajit-2.1
     Cloning into 'luajit-2.1'...
 
 2. Compile LuaJIT
 
-.. code-block:: bash
+.. code:: bash
 
     $ cd luajit-2.1/
     luajit-2.1 $ make -j8
 
 3. Install LuaJIT
 
-.. code-block:: bash
+.. code:: bash
 
     luajit-2.1 $ make install
     luajit-2.1 $ ln -s /usr/local/bin/luajit-2.1.0-alpha /usr/local/bin/luajit
@@ -70,7 +70,7 @@ Running LuaJIT
 
 Ensure that freshly installed LuaJIT works:
 
-.. code-block:: bash
+.. code:: bash
 
     $ luajit
     LuaJIT 2.1.0-alpha -- Copyright (C) 2005-2013 Mike Pall. http://luajit.org/
@@ -80,7 +80,7 @@ Ensure that freshly installed LuaJIT works:
 
 It is good idea to use LuaJIT CLI under ``rlwrap`` (on nix platforms):
 
-.. code-block:: bash
+.. code:: bash
 
     alias luajit="rlwrap luajit"
     $ luajit
@@ -104,14 +104,14 @@ Using git
 `````````
 1. Clone Lua Fun repository:
 
-.. code-block:: bash
+.. code:: bash
 
     git clone git://github.com/luafun/luafun.git
     $ cd luafun
 
 2. Run tests (optional):
 
-.. code-block:: bash
+.. code:: bash
 
     luafun $ cd tests
     luafun/tests $ ./runtest *.lua
@@ -129,7 +129,7 @@ Using wget
 
 Just download https://raw.github.com/luafun/luafun/master/fun.lua file:
 
-.. code-block:: bash
+.. code:: bash
 
     $ wget https://raw.github.com/luafun/luafun/master/fun.lua
 
@@ -138,8 +138,7 @@ Using the Library
 
 Try to run LuaJIT in the same directory where ``fun.lua`` file is located:
 
-.. code-block:: bash
-   :emphasize-lines: 4
+.. code:: bash
 
     luafun $ luajit
     LuaJIT 2.1.0-alpha -- Copyright (C) 2005-2013 Mike Pall. http://luajit.org/
@@ -159,8 +158,7 @@ you need to configure you Package Path (``package.path``). Please consult
 **Lua Fun** designed to be small ubiquitous library. It is a good idea to import
 all library functions to the global table:
 
-.. code-block:: bash
-   :emphasize-lines: 1
+.. code:: bash
 
     > for k, v in pairs(require "fun") do _G[k] = v end -- import fun.*
     > for _k, a in range(3) do print(a) end
@@ -170,8 +168,7 @@ all library functions to the global table:
 
 **Lua Fun** also provides a special **shortcut** to autoimport all functions:
 
-.. code-block:: bash
-   :emphasize-lines: 1
+.. code:: bash
 
     > require 'fun'() -- to import all lua.* functions to globals
     > each(print, range(5))
@@ -183,7 +180,7 @@ all library functions to the global table:
 
 Now you can use **Lua Fun**:
 
-.. code-block:: bash
+.. code:: bash
 
     > print(sum(filter(function(x) return x % 16 == 0 end, range(10000))))
     3130000
@@ -240,11 +237,11 @@ Please note that functions support multireturn.
 Further Actions
 ---------------
 
-- Take a look on :doc:`reference`.
-- Use :ref:`genindex` to find functions by its names.
+- Take a look on the `API Reference <api/module/fun.html>`_.
+- Use the search on the API site to find functions by their names.
 - Checkout **examples** from
   `tests/ <https://github.com/luafun/luafun/tree/master/tests>`_ directory
-- Read :doc:`under_the_hood` section
+- Read `Under the Hood <under_the_hood.html>`_ section
 - "Star" us the on GitHub_ to help the project to survive
 - Make Great Software
 - Have fun

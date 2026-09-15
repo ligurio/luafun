@@ -1,7 +1,6 @@
 Under the Hood
 ==============
 
-.. currentmodule:: fun
 
 The section sheds some light on the internal library structure and working
 principles.
@@ -13,13 +12,13 @@ Another basic primitive of the library (after functions) is the iterator. Most f
 take an iterator and return a new iterator or several ones. Iterators all the way down!
 [#iterators]_.
 
-The simplest iterators are (surprise!) the :func:`pairs` and :func:`ipairs`
-Lua functions. Have you ever tried calling, say, the :func:`ipairs` function
+The simplest iterators are (surprise!) the ``pairs`` and ``ipairs``
+Lua functions. Have you ever tried calling, say, the ``ipairs`` function
 without using it inside a ``for`` loop? Try to do that on any Lua
 implementation:
 
 .. _iterator_triplet:
-.. code-block:: bash
+.. code:: bash
 
     > =ipairs({'a', 'b', 'c'})
     function: builtin#6     table: 0x40f80e38       0
@@ -43,7 +42,7 @@ Let's see what each value is used for:
 
 Try calling the ``gen`` function manually:
 
-   .. code-block:: lua
+   .. code:: lua
 
     > gen, param, state = ipairs({'a', 'b', 'c'})
     > =gen(param, state)
@@ -60,11 +59,15 @@ It is just a nice trick to get ``for .. in`` loops working in Lua.
 Iterations
 ----------
 
-What happens when you type the following code into a Lua console::
+What happens when you type the following code into a Lua console:
+
+.. code:: lua
 
     for _it, x in ipairs({'a', 'b', 'c'}) do print(x) end
 
-According to Lua reference manual [#lua_for]_ the code above is equivalent to::
+According to Lua reference manual [#lua_for]_ the code above is equivalent to:
+
+.. code:: lua
 
     do
         -- Initialize the iterator
