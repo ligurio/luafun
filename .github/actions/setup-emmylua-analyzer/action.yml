@@ -19,5 +19,9 @@ runs:
           ${{ runner.os }}-cargo-
 
     - name: Setup emmylua_check
-      run: cargo install emmylua_check --version 0.25.1
+      run: >
+        cargo install --locked
+        --git https://github.com/EmmyLuaLs/emmylua-analyzer-rust
+        --rev d56a03b08f2c25b44d7828fb70c072bd4b3cb5c7
+        emmylua_check
       shell: bash
