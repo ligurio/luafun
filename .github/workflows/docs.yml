@@ -1,0 +1,74 @@
+#
+# Build the documentation from the RST prose in doc/ and the fun.lua
+# annotations, and publish it to GitHub Pages (luafun.github.io):
+#   - push to master  -> https://luafun.github.io/
+#   - pull request    -> https://luafun.github.io/stage/
+#
+# Requires a personal access token with write access to the
+# luafun/luafun.github.io repository, stored in the GH_PAGES_TOKEN secret.
+#
+
+name: Documentation
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+concurrency:
+  group: docs-${{ github.event_name == 'pull_request' && github.event.pull_request.number || 'master' }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install docutils and Pygments
+        run: pip install docutils==0.22.4 pygments
+
+      - uses: ./.github/actions/setup-emmylua-analyzer
+        with:
+          packages: emmylua_doc_cli
+
+      - name: Set deploy parameters
+        id: params
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "destination_dir=stage" >> "$GITHUB_OUTPUT"
+          else
+            echo "destination_dir=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check deploy eligibility
+        id: deploy
+        run: |
+          if [ "${{ github.event_name }}" = "push" ] || \
+             [ "${{ github.event.pull_request.head.repo.full_name }}" = "${{ github.repository }}" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build docs
+        run: make docs
+
+      - name: Deploy to GitHub Pages
+        if: steps.deploy.outputs.enabled == 'true'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.GH_PAGES_TOKEN }}
+          external_repository: luafun/luafun.github.io
+          publish_branch: master
+          publish_dir: ./site
+          destination_dir: ${{ steps.params.outputs.destination_dir }}
+          keep_files: true
