@@ -36,7 +36,9 @@ end
 --------------------------------------------------------------------------------
 
 -- Simple test
-dump(gen_stateful_iter({1, 2, 3, 4, 5, 6, 5, 4, 3}):drop_while(function(x) return x < 5 end))
+dump(gen_stateful_iter({1, 2, 3, 4, 5, 6, 5, 4, 3})
+    :drop_while(function(x) return x < 5 end)
+)
 --[[test
 5
 6
@@ -46,7 +48,9 @@ dump(gen_stateful_iter({1, 2, 3, 4, 5, 6, 5, 4, 3}):drop_while(function(x) retur
 --test]]
 
 -- Multireturn
-dump(gen_stateful_iter({{1, 10}, {3, 30}, {5, 50}, {6, 60}, {3, 20}}):drop_while(function(x) return x < 5 end))
+dump(gen_stateful_iter({{1, 10}, {3, 30}, {5, 50}, {6, 60}, {3, 20}})
+    :drop_while(function(x) return x < 5 end)
+)
 --[[test
 5 50
 6 60
@@ -54,8 +58,9 @@ dump(gen_stateful_iter({{1, 10}, {3, 30}, {5, 50}, {6, 60}, {3, 20}}):drop_while
 --test]]
 
 -- Multireturn with nil
--- luacheck: ignore 631
-dump(gen_stateful_iter({{1, nil, 10}, {3, nil, 30}, {5, nil, 50}, {6, nil, 60}, {3, nil, 20}}):drop_while(function(x) return x < 5 end))
+dump(gen_stateful_iter({{1, nil, 10}, {3, nil, 30}, {5, nil, 50},
+    {6, nil, 60}, {3, nil, 20}}):drop_while(function(x) return x < 5 end)
+)
 --[[test
 5 nil 50
 6 nil 60
@@ -63,7 +68,9 @@ dump(gen_stateful_iter({{1, nil, 10}, {3, nil, 30}, {5, nil, 50}, {6, nil, 60}, 
 --test]]
 
 -- Multireturn with condition on second returned value
-dump(gen_stateful_iter({{0, 1}, {0, 3}, {0, 5}, {0, 4}}):drop_while(function(_x, y) return y < 5 end))
+dump(gen_stateful_iter({{0, 1}, {0, 3}, {0, 5}, {0, 4}})
+    :drop_while(function(_x, y) return y < 5 end)
+)
 --[[test
 0 5
 0 4
@@ -75,7 +82,9 @@ dump(gen_stateful_iter({}):drop_while(function(x) return x < 5 end))
 --test]]
 
 -- Always false
-dump(gen_stateful_iter({1, 2, 3, 4, 5}):drop_while(function(x) return x > 100 end))
+dump(gen_stateful_iter({1, 2, 3, 4, 5})
+    :drop_while(function(x) return x > 100 end)
+)
 --[[test
 1
 2

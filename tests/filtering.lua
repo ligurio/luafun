@@ -50,7 +50,9 @@ print(remove_if == filter) -- an alias
 true
 --test]]
 
-dump_state(filter(function(x) return x % 2 == 0 end, ipairs({0, 1, 1, 2, 3, 4})))
+dump_state(filter(function(x) return x % 2 == 0 end,
+    ipairs({0, 1, 1, 2, 3, 4}))
+)
 --[[test
 1
 4

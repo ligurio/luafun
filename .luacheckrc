@@ -1,4 +1,6 @@
 std = "luajit"
+max_code_line_length = 80
+max_comment_line_length = 80
 ignore = {
     -- Redefining a local variable.
     "411",

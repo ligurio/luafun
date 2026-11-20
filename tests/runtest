@@ -125,7 +125,9 @@ if next(globals) then
     io.write("Some global variables have been declared by mistake:", "\n")
     for _, pollution in pairs(globals) do
         local file, line, func, var = unpack(pollution)
-        io.write(file..":"..line.." function "..func.."() = var '"..var.."'", "\n")
+        io.write(file..":"..line.." function "..func..
+            "() = var '"..var.."'", "\n"
+        )
     end
     io.write("\n", "Please declare them with the local statement", "\n")
     os.exit(1)
